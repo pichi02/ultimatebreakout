@@ -11,6 +11,9 @@ namespace gamemanager
 		void UnloadGameplay();
 		void DrawPaddle();
 		void UpdatePaddle();
+		void UpdateBall();
+		void DrawBall();
+		void CheckBallAndPaddleCollision();
 		extern bool gameOver;
 	}
 }
