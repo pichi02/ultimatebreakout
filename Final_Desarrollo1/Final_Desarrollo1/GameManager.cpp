@@ -3,7 +3,7 @@
 
 #include "Menu.h"
 #include "Credits.h"
-//#include "Gameplay.h"
+
 #include "Pause.h"
 #include "GameOver.h"
 //#include "Player.h"
@@ -12,7 +12,7 @@
 using namespace gamemanager;
 using namespace menu;
 using namespace credits;
-//using namespace gameplay;
+
 using namespace pause;
 using namespace gameover;
 //using namespace player;
@@ -51,7 +51,7 @@ namespace gamemanager
 			UpdateMenu();
 			break;
 		case GAMEPLAY:
-		/*	UpdateFrame();*/
+			UpdateFrame();
 			StopMusicStream(music);
 			break;
 		case GAMEOVER:
@@ -79,7 +79,7 @@ namespace gamemanager
 			DrawMenu();
 			break;
 		case GAMEPLAY:
-			/*Draw();*/
+			Draw();
 			break;
 		case GAMEOVER:
 			DrawGameOver();

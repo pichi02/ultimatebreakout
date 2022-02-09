@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include"GameManager.h"
 
+
 using namespace gamemanager;
 
 namespace gamemanager
@@ -131,7 +132,7 @@ namespace gamemanager
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
 					UnloadMenu();
-					//InitValues();
+					InitValues();
 					currentScreen = GAMEPLAY;
 				}
 			}
