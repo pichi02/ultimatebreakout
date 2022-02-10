@@ -31,7 +31,7 @@ namespace gamemanager
 	static void InitGame()
 	{
 		SetExitKey(0);
-		InitWindow(screenWidth, screenHeight, "FlappyBirds");
+		InitWindow(screenWidth, screenHeight, "Ultimate Breakout");
 		/*InitValues();*/
 		InitMenu();
 		InitCredits();
@@ -46,8 +46,7 @@ namespace gamemanager
 		switch (currentScreen)
 		{
 		case MENU:
-
-			UpdateMusicStream(music);
+			/*UpdateMusicStream(music);*/
 			UpdateMenu();
 			break;
 		case GAMEPLAY:
@@ -58,8 +57,7 @@ namespace gamemanager
 			UpdateGameOver();
 			break;
 		case CREDITS:
-
-			UpdateMusicStream(music);
+			/*UpdateMusicStream(music);*/
 			UpdateCredits();
 			break;
 		case PAUSE:

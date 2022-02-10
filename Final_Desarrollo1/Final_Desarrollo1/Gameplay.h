@@ -4,6 +4,7 @@ namespace gamemanager
 {
 	namespace gameplay
 	{
+		extern bool gameOver;
 		void InitValues();
 		void UpdateFrame();
 		void Draw();
@@ -14,6 +15,10 @@ namespace gamemanager
 		void UpdateBall();
 		void DrawBall();
 		void CheckBallAndPaddleCollision();
-		extern bool gameOver;
+		bool GameOver();
+		void InitBricks();
+		void DrawBricks();
+		void BricksAndBallCollision();
+		void UpdateBall1();
 	}
 }

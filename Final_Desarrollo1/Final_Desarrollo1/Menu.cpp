@@ -55,7 +55,7 @@ namespace gamemanager
 		void InitMenu()
 		{
 
-			menuImage = LoadImage("res/menuTexture.png");
+			/*menuImage = LoadImage("res/menuTexture.png");*/
 			menuImageTexture = LoadTextureFromImage(menuImage);
 			halfScreenWidth = GetScreenWidth() / 2;
 			halfScreenHeight = GetScreenHeight() / 2;
@@ -131,8 +131,8 @@ namespace gamemanager
 
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
-					UnloadMenu();
 					InitValues();
+					UnloadMenu();
 					currentScreen = GAMEPLAY;
 				}
 			}
