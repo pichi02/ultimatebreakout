@@ -55,7 +55,7 @@ namespace gamemanager
 			}
 			else
 			{
-				currentScreen = MENU;
+				currentScreen = GAMEOVER;
 
 			}
 			gameOver = GameOver();
