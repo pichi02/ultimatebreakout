@@ -10,40 +10,48 @@ namespace gamemanager
 	{
 		extern bool gameOver = false;
 		bool collide = false;
-		Rectangle paddle;
-		Rectangle ball;
-		float paddleSpeed;
 		const int bricksPerColumn = 11;
 		const int bricksPerRow = 5;
-		Vector2 ballSpeed;
-		Rectangle bricks[bricksPerColumn][bricksPerRow];
-		bool isBrickActive[bricksPerColumn][bricksPerRow];
-		
+		float brickWidth = 60;
+		float brickHeight = 30;
+
+
+		Ball* pelota;
+		Paddle* paleta;
+		Brick* ladrillos[bricksPerColumn][bricksPerRow];
 
 		void InitValues()
 		{
-			paddleSpeed = 0.2f;
-			paddle.x = GetScreenWidth() / 2;
-			paddle.y = GetScreenHeight() * 0.9;
-			paddle.width = 150;
-			paddle.height = 10;
-			ballSpeed.x = 0.2f;
-			ballSpeed.y = -0.2f;
-			ball.x = paddle.x;
-			ball.y = GetScreenHeight() * 0.7;
-			ball.width = 10;
-			ball.height = 10;
-			InitBricks();
-			
+
+			pelota = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.7f }, { 0.1f,-0.1f }, 10, 10);
+			paleta = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 0.2f, 150, 10);
+			for (int i = 0; i < bricksPerColumn; i++)
+			{
+				for (int j = 0; j < bricksPerRow; j++)
+				{
+					ladrillos[i][j] = new Brick(brickWidth, brickHeight, { (brickWidth * 1.2f) * i ,(brickHeight * 1.2f) * j });
+				}
+			}
+			/*	InitBricks();*/
+
 		}
 		void UpdateFrame()
 		{
 			if (!gameOver)
 			{
-				UpdatePaddle();
+				/*UpdatePaddle();
 				UpdateBall();
 				CheckBallAndPaddleCollision();
-				BricksAndBallCollision();
+				BricksAndBallCollision();*/
+				pelota->Update(paleta, collide);
+				paleta->Update();
+				for (int i = 0; i < bricksPerColumn; i++)
+				{
+					for (int j = 0; j < bricksPerRow; j++)
+					{
+						ladrillos[i][j]->Update(pelota);
+					}
+				}
 			}
 			else
 			{
@@ -55,9 +63,22 @@ namespace gamemanager
 		void Draw()
 		{
 			ClearBackground(BLACK);
-			DrawPaddle();
-			DrawBall();
-			DrawBricks();
+			/*DrawPaddle();
+			DrawBall();*/
+			for (int i = 0; i < bricksPerColumn; i++)
+			{
+				for (int j = 0; j < bricksPerRow; j++)
+				{
+					if (ladrillos[i][j]->GetIsActive())
+					{
+						ladrillos[i][j]->Draw();
+					}
+
+				}
+			}
+			/*DrawBricks();*/
+			paleta->Draw();
+			pelota->Draw();
 		}
 		void ResetValues()
 		{
@@ -65,7 +86,11 @@ namespace gamemanager
 		void UnloadGameplay()
 		{
 		}
-		void DrawPaddle()
+		bool GameOver()
+		{
+			return pelota->GetPosition().y >= GetScreenHeight();;
+		}
+		/*void DrawPaddle()
 		{
 			DrawRectangle(paddle.x, paddle.y, paddle.width, paddle.height, BLUE);
 		}
@@ -133,10 +158,7 @@ namespace gamemanager
 			}
 		}
 
-		bool GameOver()
-		{
-			return ball.y >= GetScreenHeight();;
-		}
+
 
 		void InitBricks()
 		{
@@ -219,7 +241,7 @@ namespace gamemanager
 
 				}
 			}
-		}
+		}*/
 
 
 	}

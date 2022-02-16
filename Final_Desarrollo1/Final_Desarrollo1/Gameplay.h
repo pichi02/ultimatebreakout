@@ -1,5 +1,8 @@
 #pragma once
 #include"raylib.h"
+#include"Ball.h"
+#include"Paddle.h"
+#include"Brick.h"
 namespace gamemanager
 {
 	namespace gameplay
