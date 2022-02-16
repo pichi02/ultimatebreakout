@@ -1,7 +1,6 @@
 #include "Gameplay.h"
 #include"GameManager.h"
 
-
 using namespace gamemanager;
 namespace gamemanager
 {
@@ -15,7 +14,7 @@ namespace gamemanager
 		float brickWidth = 60;
 		float brickHeight = 30;
 
-		
+
 		Ball* ball;
 		Paddle* paddle;
 		Brick* bricks[bricksPerColumn][bricksPerRow];
@@ -23,7 +22,7 @@ namespace gamemanager
 		void InitValues()
 		{
 			gameOver = false;
-			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.7f }, { 300.0f,-300.0f }, 10, 10);
+			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.88f }, { 300.0f,-300.0f }, 10, 10);
 			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 150, 10);
 			for (int i = 0; i < bricksPerColumn; i++)
 			{
@@ -48,12 +47,14 @@ namespace gamemanager
 						bricks[i][j]->Update(ball);
 					}
 				}
+				CheckPause();
 			}
 			else
 			{
 				currentScreen = GAMEOVER;
 
 			}
+
 			gameOver = GameOver();
 		}
 		void Draw()
@@ -86,7 +87,13 @@ namespace gamemanager
 		{
 			return ball->GetPosition().y >= GetScreenHeight();;
 		}
-
+		void CheckPause()
+		{
+			if (IsKeyPressed('P'))
+			{
+				currentScreen = PAUSE;
+			}
+		}
 
 	}
 }

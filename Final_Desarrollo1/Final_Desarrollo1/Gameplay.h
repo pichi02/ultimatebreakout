@@ -23,5 +23,6 @@ namespace gamemanager
 		void DrawBricks();
 		void BricksAndBallCollision();
 		void UpdateBall1();
+		void CheckPause();
 	}
 }

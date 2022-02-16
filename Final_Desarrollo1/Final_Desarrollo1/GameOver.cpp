@@ -77,8 +77,9 @@ namespace gamemanager
 
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
+					ResetValues();
 					currentScreen = GAMEPLAY;
-					/*ResetValues();*/
+					
 				}
 			}
 			else colorRect1.a = 255;

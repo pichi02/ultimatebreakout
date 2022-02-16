@@ -6,6 +6,7 @@ Ball::Ball(Vector2 pos, Vector2 speed, float width, float height)
 	this->speed = speed;
 	this->width = width;
 	this->height = height;
+	isActive = false;
 }
 
 Ball::~Ball()
@@ -32,10 +33,22 @@ float Ball::GetHeight()
 	return height;
 }
 
-void Ball::Move()
+void Ball::Move(Paddle *paddle)
 {
-	pos.x += speed.x * GetFrameTime();
-	pos.y += speed.y * GetFrameTime();
+	if (isActive)
+	{
+		pos.x += speed.x * GetFrameTime();
+		pos.y += speed.y * GetFrameTime();
+	}
+	else
+	{
+		pos.x = paddle->GetPos().x + paddle->GetWidth() / 2;
+	}
+	if (IsKeyPressed(KEY_SPACE))
+	{
+		isActive = true;
+	}
+	
 }
 
 void Ball::CheckWallCollision()
@@ -82,7 +95,7 @@ void Ball::Draw()
 
 void Ball::Update(Paddle* paddle, bool& collide)
 {
-	Move();
+	Move(paddle);
 	CheckWallCollision();
 	CheckPaddleCollision(*paddle, collide);
 }
@@ -95,4 +108,14 @@ void Ball::ReverseXSpeed()
 void Ball::ReverseYSpeed()
 {
 	speed.y *= -1;
+}
+
+bool Ball::GetIsActive()
+{
+	return isActive;
+}
+
+void Ball::SetIsActive(bool isActive)
+{
+	this->isActive = isActive;
 }
