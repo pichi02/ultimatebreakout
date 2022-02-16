@@ -34,8 +34,8 @@ float Ball::GetHeight()
 
 void Ball::Move()
 {
-	pos.x += speed.x;
-	pos.y += speed.y;
+	pos.x += speed.x * GetFrameTime();
+	pos.y += speed.y * GetFrameTime();
 }
 
 void Ball::CheckWallCollision()

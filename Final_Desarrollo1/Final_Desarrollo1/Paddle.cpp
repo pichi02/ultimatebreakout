@@ -18,7 +18,7 @@ void Paddle::Move()
 	{
 		if (pos.x >= 0)
 		{
-			pos.x -= speed;
+			pos.x -= speed * GetFrameTime();
 		}
 
 	}
@@ -26,11 +26,11 @@ void Paddle::Move()
 	{
 		if (pos.x < GetScreenWidth() - width)
 		{
-			pos.x += speed;
+			pos.x += speed * GetFrameTime();
 		}
 
 	}
-	
+
 }
 
 Vector2 Paddle::GetPos()
