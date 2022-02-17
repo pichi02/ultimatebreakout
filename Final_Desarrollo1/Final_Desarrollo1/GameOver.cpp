@@ -17,6 +17,7 @@ namespace gamemanager
 		static char text1[] = "GAME OVER";
 		static char text3[] = "JUGAR DE NUEVO";
 		static char text4[] = "MENU";
+		static char text5[] = "GANASTE";
 		static int text1PositionX = 0;
 		static int text1PositionY = 0;
 		static int text2PositionX = 0;
@@ -67,7 +68,7 @@ namespace gamemanager
 			rect2.x = halfScreenWidth - rect1.width / 2;
 			rect2.y = halfScreenHeight + GetScreenHeight() * 0.21;
 		}
-
+		
 		void UpdateGameOver()
 		{
 			mousePoint = GetMousePosition();
@@ -105,7 +106,14 @@ namespace gamemanager
 			ClearBackground(BLACK);
 			DrawRectangleRec(rect1, colorRect1);
 			DrawRectangleRec(rect2, colorRect2);
-			DrawText(text1, text1PositionX, text1PositionY, sizeText1, WHITE);
+			if (gameOver)
+			{
+				DrawText(text1, text1PositionX, text1PositionY, sizeText1, WHITE);
+			}
+			else
+			{
+				DrawText(text5, text1PositionX, text1PositionY, sizeText1, WHITE);
+			}
 			DrawText(text3, text3PositionX, text3PositionY, sizeText2, BLACK);
 			DrawText(text4, text4PositionX, text4PositionY, sizeText2, BLACK);
 		}
