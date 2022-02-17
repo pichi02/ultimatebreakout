@@ -11,7 +11,7 @@ namespace gamemanager
 		bool collide = false;
 		const int bricksPerColumn = 11;
 		const int bricksPerRow = 5;
-		float brickWidth = 60;
+		float brickWidth = 61;
 		float brickHeight = 30;
 
 
@@ -22,13 +22,13 @@ namespace gamemanager
 		void InitValues()
 		{
 			gameOver = false;
-			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.88f }, { 300.0f,-300.0f }, 10, 10);
+			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { 300.0f,-300.0f }, 15,15);
 			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 150, 10);
 			for (int i = 0; i < bricksPerColumn; i++)
 			{
 				for (int j = 0; j < bricksPerRow; j++)
 				{
-					bricks[i][j] = new Brick(brickWidth, brickHeight, { (brickWidth * 1.2f) * i ,(brickHeight * 1.2f) * j });
+					bricks[i][j] = new Brick(brickWidth, brickHeight, { (brickWidth * 1.2f) * i,(brickHeight * 1.2f) * j + 30 });
 				}
 			}
 			/*	InitBricks();*/

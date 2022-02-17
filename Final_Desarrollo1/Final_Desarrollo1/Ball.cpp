@@ -33,7 +33,7 @@ float Ball::GetHeight()
 	return height;
 }
 
-void Ball::Move(Paddle *paddle)
+void Ball::Move(Paddle* paddle)
 {
 	if (isActive)
 	{
@@ -48,7 +48,7 @@ void Ball::Move(Paddle *paddle)
 	{
 		isActive = true;
 	}
-	
+
 }
 
 void Ball::CheckWallCollision()
@@ -71,16 +71,28 @@ void Ball::CheckPaddleCollision(Paddle paddle, bool& collide)
 	if (CheckCollisionRecs(Rectangle{ pos.x,pos.y,width,height }, Rectangle{ paddle.GetPos().x,paddle.GetPos().y, paddle.GetWidth(),paddle.GetHeight() }) && !collide)
 	{
 		collide = true;
-		if (pos.x > paddle.GetPos().x + paddle.GetWidth() / 2 && speed.x < 0)
+		if (pos.x + width >= paddle.GetPos().x && pos.x + width < paddle.GetPos().x + paddle.GetWidth() / 5)
 		{
-			speed.x *= -1;
+			speed.x = -speed.y;
 		}
-		if (pos.x < paddle.GetPos().x + paddle.GetWidth() / 2 && speed.x>0)
+		else if (pos.x + width >= paddle.GetPos().x + paddle.GetWidth() / 5 && pos.x + width < paddle.GetPos().x + paddle.GetWidth() * (2.0f / 5.0f))
 		{
-			speed.x *= -1;
+			speed.x = -(speed.y * 0.5);
 		}
-
+		else if (pos.x + width >= paddle.GetPos().x + paddle.GetWidth() * (2 / 5) && pos.x + width < paddle.GetPos().x + paddle.GetWidth() * (3.0f / 5.0f))
+		{
+			speed.x = 0;
+		}
+		else if (pos.x + width >= paddle.GetPos().x + paddle.GetWidth() * (3 / 5) && pos.x + width < paddle.GetPos().x + paddle.GetWidth() * (4.0f / 5.0f))
+		{
+			speed.x = (speed.y * 0.5);
+		}
+		else
+		{
+			speed.x = speed.y;
+		}
 		speed.y *= -1;
+
 	}
 	else if (!CheckCollisionRecs(Rectangle{ pos.x,pos.y,width,height }, Rectangle{ paddle.GetPos().x,paddle.GetPos().y, paddle.GetWidth(),paddle.GetHeight() }))
 	{
