@@ -160,6 +160,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Credits.cpp" />
+    <ClCompile Include="EnlargePaddlePowerUp.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Gameplay.cpp" />
@@ -167,18 +168,21 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Rect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Credits.h" />
+    <ClInclude Include="EnlargePaddlePowerUp.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="Pause.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Rect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

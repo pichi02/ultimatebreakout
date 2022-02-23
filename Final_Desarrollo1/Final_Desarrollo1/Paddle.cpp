@@ -63,4 +63,9 @@ void Paddle::Draw()
 	DrawRectangle(pos.x, pos.y, width, height, BLUE);
 }
 
+void Paddle::SetWidth(float width)
+{
+	this->width = width;
+}
+
 

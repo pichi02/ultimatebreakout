@@ -19,6 +19,7 @@ public:
 	float GetHeight();
 	void Update();
 	void Draw();
+	void SetWidth(float width);
 	
 };
 
