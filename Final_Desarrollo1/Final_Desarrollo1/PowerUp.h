@@ -21,7 +21,7 @@ public:
 	void SetIsActive(bool isActive);
 	void Move();
 	bool GetIsActive();
-	void Draw();
+	virtual void Draw() = 0;
 
 
 };

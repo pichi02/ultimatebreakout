@@ -84,3 +84,8 @@ void Brick::Update(Ball* ball)
 {
 	CheckBallCollision(ball);
 }
+
+void Brick::SetIsActive(bool isActive)
+{
+	this->isActive = isActive;
+}

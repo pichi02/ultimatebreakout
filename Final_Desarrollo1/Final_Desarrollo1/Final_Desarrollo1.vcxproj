@@ -170,6 +170,8 @@
     <ClCompile Include="Pause.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Shoot.cpp" />
+    <ClCompile Include="ShootsPowerUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -184,6 +186,8 @@
     <ClInclude Include="Pause.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="Shoot.h" />
+    <ClInclude Include="ShootsPowerUp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

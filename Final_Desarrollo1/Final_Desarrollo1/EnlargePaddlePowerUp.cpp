@@ -1,15 +1,20 @@
 #include "EnlargePaddlePowerUp.h"
 
-EnlargePaddlePoweUp::EnlargePaddlePoweUp(Vector2 pos, float speed, float width, float height, bool isActive) :PowerUp(pos, speed, width, height, isActive)
+EnlargePaddlePowerUp::EnlargePaddlePowerUp(Vector2 pos, float speed, float width, float height, bool isActive) :PowerUp(pos, speed, width, height, isActive)
 {
 }
 
-EnlargePaddlePoweUp::~EnlargePaddlePoweUp()
+EnlargePaddlePowerUp::~EnlargePaddlePowerUp()
 {
 }
 
-void EnlargePaddlePoweUp::Collect(Paddle* paddle)
+void EnlargePaddlePowerUp::Collect(Paddle* paddle)
 {
 	paddle->SetWidth(300.0f);
+}
+
+void EnlargePaddlePowerUp::Draw()
+{
+	DrawRectangle(GetPos().x, GetPos().y, GetWidth(), GetHeight(), MAGENTA);
 }
 

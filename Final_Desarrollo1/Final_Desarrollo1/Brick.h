@@ -18,5 +18,6 @@ public:
 	float GetHeight();
 	bool GetIsActive();
 	void Update(Ball* ball);
+	void SetIsActive(bool isActive);
 };
 

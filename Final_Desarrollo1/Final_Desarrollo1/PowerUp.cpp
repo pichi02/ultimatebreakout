@@ -53,7 +53,4 @@ bool PowerUp::GetIsActive()
 	return isActive;
 }
 
-void PowerUp::Draw()
-{
-	DrawRectangle(pos.x, pos.y, width, height, MAGENTA);
-}
+
