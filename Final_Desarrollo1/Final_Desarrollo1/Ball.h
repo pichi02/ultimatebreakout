@@ -26,6 +26,8 @@ public:
 	void ReverseYSpeed();
 	bool GetIsActive();
 	void SetIsActive(bool isActive);
+	void IncreaseSpeed();
+
 
 
 };

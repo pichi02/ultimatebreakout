@@ -131,3 +131,25 @@ void Ball::SetIsActive(bool isActive)
 {
 	this->isActive = isActive;
 }
+
+void Ball::IncreaseSpeed()
+{
+	if (speed.x > 0)
+	{
+		speed.x += 0.01f;
+	}
+	else if (speed.x < 0)
+	{
+		speed.x -= 0.01f;
+	}
+
+	if (speed.y > 0)
+	{
+		speed.y += 0.01f;
+	}
+	else if (speed.y < 0)
+	{
+		speed.y -= 0.01f;
+	}
+
+}
