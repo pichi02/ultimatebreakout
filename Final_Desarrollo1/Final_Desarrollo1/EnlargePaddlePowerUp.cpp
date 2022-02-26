@@ -8,7 +8,7 @@ EnlargePaddlePowerUp::~EnlargePaddlePowerUp()
 {
 }
 
-void EnlargePaddlePowerUp::Collect(Paddle* paddle)
+void EnlargePaddlePowerUp::Collect(Paddle* paddle, Ball* ball)
 {
 	paddle->SetWidth(300.0f);
 }

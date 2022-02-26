@@ -13,7 +13,7 @@ private:
 public:
 	Ball(Vector2 pos, Vector2 speed, float width, float height);
 	~Ball();
-	Vector2 GetPosition();
+	Vector2 GetPos();
 	Vector2 GetSpeed();
 	float GetWidth();
 	float GetHeight();

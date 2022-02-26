@@ -13,7 +13,7 @@ ShootsPowerUp::~ShootsPowerUp()
 {
 }
 
-void ShootsPowerUp::Collect(Paddle* paddle)
+void ShootsPowerUp::Collect(Paddle* paddle, Ball* ball)
 {
 
 	shootRate += 5;
@@ -56,7 +56,7 @@ void ShootsPowerUp::CheckShootAndBrickCollision(Brick* brick, int& smashedBricks
 				brick->SetIsActive(false);
 				smashedBricksCount++;
 			}
-			
+
 		}
 	}
 

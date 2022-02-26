@@ -2,6 +2,7 @@
 #include"GameManager.h"
 #include"EnlargePaddlePowerUp.h"
 #include"ShootsPowerUp.h"
+#include"FloorPowerUp.h"
 
 using namespace gamemanager;
 namespace gamemanager
@@ -14,6 +15,7 @@ namespace gamemanager
 		bool collide = false;
 		bool isPowerUp1Picked;
 		bool isPowerUp2Picked;
+		bool isPowerUp3Picked;
 		const int bricksPerColumn = 11;
 		const int bricksPerRow = 5;
 		float brickWidth = 61;
@@ -21,6 +23,7 @@ namespace gamemanager
 		float timer;
 		float powerUp1Timer;
 		float powerUp2Timer;
+		float powerUp3Timer;
 		int smashedBicksCount;
 		int powerUpRandom;
 
@@ -29,14 +32,17 @@ namespace gamemanager
 		Brick* bricks[bricksPerColumn][bricksPerRow];
 		EnlargePaddlePowerUp* powerUp1;
 		ShootsPowerUp* powerUp2;
+		FloorPowerUp* powerUp3;
 
 		void InitValues()
 		{
 			timer = 0;
 			isPowerUp1Picked = false;
 			isPowerUp2Picked = false;
+			isPowerUp3Picked = false;
 			powerUp1Timer = 0;
 			powerUp1Timer = 0;
+			powerUp3Timer = 0;
 			smashedBicksCount = 0;
 			powerUpRandom = 0;
 			win = false;
@@ -45,6 +51,8 @@ namespace gamemanager
 			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
 			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 0.05f, 10, 10, false);
 			powerUp2 = new ShootsPowerUp({ 0,0 }, 0.05f, 10, 10, false, paddle);
+			powerUp3 = new FloorPowerUp({ 0,0 }, 0.05f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.95f,(float)GetScreenWidth(),10.0f });
+
 			for (int i = 0; i < bricksPerColumn; i++)
 			{
 				for (int j = 0; j < bricksPerRow; j++)
@@ -59,7 +67,7 @@ namespace gamemanager
 		{
 			if (!gameOver)
 			{
-				/*powerUp2->Collect(paddle);*/
+
 
 				timer += GetFrameTime();
 				if ((int)timer % 10 == 0)
@@ -74,8 +82,8 @@ namespace gamemanager
 					powerUp1->Move();
 					if (CheckCollisionRecs(Rectangle{ powerUp1->GetPos().x, powerUp1->GetPos().y, powerUp1->GetWidth(), powerUp1->GetHeight() }, Rectangle{ paddle->GetPos().x, paddle->GetPos().y, paddle->GetWidth(), paddle->GetHeight() }))
 					{
-						powerUp1->Collect(paddle);
 						isPowerUp1Picked = true;
+						powerUp1->Collect(paddle, ball);
 					}
 
 				}
@@ -95,9 +103,24 @@ namespace gamemanager
 					}
 
 				}
+				if (powerUp3->GetIsActive() && !isPowerUp3Picked)
+				{
+
+					powerUp3->Move();
+					if (CheckCollisionRecs(Rectangle{ powerUp3->GetPos().x, powerUp3->GetPos().y, powerUp3->GetWidth(), powerUp3->GetHeight() }, Rectangle{ paddle->GetPos().x, paddle->GetPos().y, paddle->GetWidth(), paddle->GetHeight() }))
+					{
+						isPowerUp3Picked = true;
+					}
+
+				}
+
+				if (isPowerUp1Picked)
+				{
+					powerUp1Timer += GetFrameTime();
+				}
 				if (isPowerUp2Picked && powerUp2Timer < 10)
 				{
-					powerUp2->Collect(paddle);
+					powerUp2->Collect(paddle, ball);
 					powerUp2Timer += GetFrameTime();
 					for (int i = 0; i < bricksPerColumn; i++)
 					{
@@ -106,6 +129,11 @@ namespace gamemanager
 							powerUp2->CheckShootAndBrickCollision(bricks[i][j], smashedBicksCount);
 						}
 					}
+				}
+				if (isPowerUp3Picked)
+				{
+					powerUp3->Collect(paddle, ball);
+					powerUp3Timer += GetFrameTime();
 				}
 				else if (powerUp2Timer >= 10)
 				{
@@ -122,6 +150,12 @@ namespace gamemanager
 					powerUp1->SetIsActive(false);
 					powerUp1Timer = 0;
 				}
+				if (powerUp3Timer >= 10)
+				{
+					isPowerUp3Picked = false;
+					powerUp3->SetIsActive(false);
+					powerUp3Timer = 0;
+				}
 
 				for (int i = 0; i < bricksPerColumn; i++)
 				{
@@ -131,19 +165,24 @@ namespace gamemanager
 						if (bricks[i][j]->GetIsActive())
 						{
 							bricks[i][j]->Update(ball);
-							if (CheckCollisionRecs(Rectangle{ ball->GetPosition().x,ball->GetPosition().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ bricks[i][j]->GetPos().x,bricks[i][j]->GetPos().y,bricks[i][j]->GetWidth(),bricks[i][j]->GetHeight() }))
+							if (CheckCollisionRecs(Rectangle{ ball->GetPos().x,ball->GetPos().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ bricks[i][j]->GetPos().x,bricks[i][j]->GetPos().y,bricks[i][j]->GetWidth(),bricks[i][j]->GetHeight() }))
 							{
 								powerUpRandom = GetRandomValue(1, 20);
-								if (powerUpRandom >= 15)
+								if (powerUpRandom >= 18)
 								{
 									powerUp1->SetIsActive(true);
 									powerUp1->SetPos(bricks[i][j]->GetPos());
 
 								}
-								else if (powerUpRandom >= 0 && powerUpRandom < 15)
+								else if (powerUpRandom >= 15 && powerUpRandom < 18)
 								{
 									powerUp2->SetIsActive(true);
 									powerUp2->SetPos(bricks[i][j]->GetPos());
+								}
+								else if (powerUpRandom >= 12 && powerUpRandom < 15)
+								{
+									powerUp3->SetIsActive(true);
+									powerUp3->SetPos(bricks[i][j]->GetPos());
 								}
 								smashedBicksCount++;
 							}
@@ -190,6 +229,18 @@ namespace gamemanager
 			{
 				powerUp2->Draw();
 			}
+			if (powerUp3->GetIsActive())
+			{
+				if (!isPowerUp3Picked)
+				{
+					powerUp3->Draw();
+				}
+				else
+				{
+					powerUp3->DrawFloor();
+				}
+				
+			}
 			paddle->Draw();
 			ball->Draw();
 		}
@@ -202,7 +253,7 @@ namespace gamemanager
 		}
 		bool GameOver()
 		{
-			return ball->GetPosition().y >= GetScreenHeight();;
+			return ball->GetPos().y >= GetScreenHeight();;
 		}
 		void CheckPause()
 		{

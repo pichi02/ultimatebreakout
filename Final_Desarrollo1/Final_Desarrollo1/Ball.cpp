@@ -13,7 +13,7 @@ Ball::~Ball()
 {
 }
 
-Vector2 Ball::GetPosition()
+Vector2 Ball::GetPos()
 {
 	return pos;
 }

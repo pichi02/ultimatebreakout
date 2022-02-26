@@ -14,10 +14,10 @@ Brick::~Brick()
 
 void Brick::CheckBallCollision(Ball* ball)
 {
-	Vector2 ballPosition = { ball->GetPosition().x + ball->GetWidth() / 2, ball->GetPosition().y + ball->GetHeight() / 2 };
+	Vector2 ballPosition = { ball->GetPos().x + ball->GetWidth() / 2, ball->GetPos().y + ball->GetHeight() / 2 };
 	if (isActive)
 	{
-		if (CheckCollisionRecs(Rectangle{ ball->GetPosition().x,ball->GetPosition().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ pos.x,pos.y,width,height }))
+		if (CheckCollisionRecs(Rectangle{ ball->GetPos().x,ball->GetPos().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ pos.x,pos.y,width,height }))
 		{
 			Vector2 oppositeCorner = { pos.x + width, pos.y + height };
 			isActive = false;

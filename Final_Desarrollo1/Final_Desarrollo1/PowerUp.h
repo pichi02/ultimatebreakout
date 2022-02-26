@@ -1,6 +1,7 @@
 #pragma once
 #include"raylib.h"
 #include"Paddle.h"
+#include"Ball.h"
 class PowerUp
 {
 private:
@@ -11,7 +12,7 @@ private:
 	bool isActive;
 public:
 	PowerUp(Vector2 pos, float speed, float width, float heigth, bool isActive);
-	virtual void Collect(Paddle* paddle) = 0;
+	virtual void Collect(Paddle* paddle, Ball* ball) = 0;
 	~PowerUp();
 	Vector2 GetPos();
 	float GetSpeed();

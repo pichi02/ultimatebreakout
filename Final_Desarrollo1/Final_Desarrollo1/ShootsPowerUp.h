@@ -11,10 +11,10 @@ private:
 public:
 	ShootsPowerUp(Vector2 pos, float speed, float width, float height, bool isActive, Paddle* paddle);
 	~ShootsPowerUp();
-	void Collect(Paddle* paddle);
+	void Collect(Paddle* paddle, Ball* ball);
 	void CheckShootAndBrickCollision(Brick* brick, int& smashedBricksCount);
 	void Draw();
-	
+
 	void TurnOffShoots();
 
 

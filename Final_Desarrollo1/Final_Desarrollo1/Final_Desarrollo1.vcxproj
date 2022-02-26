@@ -161,6 +161,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="EnlargePaddlePowerUp.cpp" />
+    <ClCompile Include="FloorPowerUp.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Gameplay.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="EnlargePaddlePowerUp.h" />
+    <ClInclude Include="FloorPowerUp.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Gameplay.h" />
