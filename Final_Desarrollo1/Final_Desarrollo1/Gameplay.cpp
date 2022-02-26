@@ -179,6 +179,18 @@ namespace gamemanager
 					powerUp3->SetIsActive(false);
 					powerUp3Timer = 0;
 				}
+				if (!isPowerUp1Picked&&powerUp1->GetPos().y>GetScreenHeight())
+				{
+					powerUp1->SetIsActive(false);
+				}
+				if (!isPowerUp2Picked && powerUp2->GetPos().y > GetScreenHeight())
+				{
+					powerUp2->SetIsActive(false);
+				}
+				if (!isPowerUp3Picked && powerUp3->GetPos().y > GetScreenHeight())
+				{
+					powerUp3->SetIsActive(false);
+				}
 
 				for (int i = 0; i < bricksPerColumn; i++)
 				{
@@ -199,19 +211,32 @@ namespace gamemanager
 
 								if (powerUpRandom == 10)
 								{
-									powerUp1->SetIsActive(true);
-									powerUp1->SetPos(bricks[i][j]->GetPos());
+									if (!powerUp1->GetIsActive())
+									{
+										powerUp1->SetIsActive(true);
+										powerUp1->SetPos(bricks[i][j]->GetPos());
+
+									}
+									
 
 								}
 								else if (powerUpRandom == 9)
 								{
-									powerUp2->SetIsActive(true);
-									powerUp2->SetPos(bricks[i][j]->GetPos());
+									if (!powerUp2->GetIsActive())
+									{
+										powerUp2->SetIsActive(true);
+										powerUp2->SetPos(bricks[i][j]->GetPos());
+									}
+									
 								}
 								else if (powerUpRandom == 8)
 								{
-									powerUp3->SetIsActive(true);
-									powerUp3->SetPos(bricks[i][j]->GetPos());
+									if (!powerUp3->GetIsActive())
+									{
+										powerUp3->SetIsActive(true);
+										powerUp3->SetPos(bricks[i][j]->GetPos());
+									}
+									
 								}
 								smashedBicksCount++;
 							}
