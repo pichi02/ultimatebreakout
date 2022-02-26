@@ -26,6 +26,7 @@ namespace gamemanager
 		float powerUp3Timer;
 		int smashedBicksCount;
 		int powerUpRandom;
+		int lastPowerUpRandom;
 
 		Ball* ball;
 		Paddle* paddle;
@@ -45,6 +46,7 @@ namespace gamemanager
 			powerUp3Timer = 0;
 			smashedBicksCount = 0;
 			powerUpRandom = 0;
+			lastPowerUpRandom = 0;
 			win = false;
 			gameOver = false;
 			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { 150.0f,-150.0f }, 15, 15);
@@ -167,19 +169,25 @@ namespace gamemanager
 							bricks[i][j]->Update(ball);
 							if (CheckCollisionRecs(Rectangle{ ball->GetPos().x,ball->GetPos().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ bricks[i][j]->GetPos().x,bricks[i][j]->GetPos().y,bricks[i][j]->GetWidth(),bricks[i][j]->GetHeight() }))
 							{
-								powerUpRandom = GetRandomValue(1, 20);
-								if (powerUpRandom >= 18)
+
+								do
+								{
+									powerUpRandom = GetRandomValue(1, 10);
+								} while (powerUpRandom == lastPowerUpRandom);
+								lastPowerUpRandom = powerUpRandom;
+
+								if (powerUpRandom == 10)
 								{
 									powerUp1->SetIsActive(true);
 									powerUp1->SetPos(bricks[i][j]->GetPos());
 
 								}
-								else if (powerUpRandom >= 15 && powerUpRandom < 18)
+								else if (powerUpRandom == 9)
 								{
 									powerUp2->SetIsActive(true);
 									powerUp2->SetPos(bricks[i][j]->GetPos());
 								}
-								else if (powerUpRandom >= 12 && powerUpRandom < 15)
+								else if (powerUpRandom == 8)
 								{
 									powerUp3->SetIsActive(true);
 									powerUp3->SetPos(bricks[i][j]->GetPos());
@@ -239,7 +247,7 @@ namespace gamemanager
 				{
 					powerUp3->DrawFloor();
 				}
-				
+
 			}
 			paddle->Draw();
 			ball->Draw();

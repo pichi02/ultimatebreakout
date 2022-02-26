@@ -54,7 +54,7 @@ void Ball::Move(Paddle* paddle)
 void Ball::CheckWallCollision()
 {
 
-	if (pos.x <= 0 || pos.x >= GetScreenWidth() - width)
+	if (pos.x <= 0 || pos.x + width >= GetScreenWidth())
 	{
 		speed.x *= -1;
 	}
@@ -134,20 +134,20 @@ void Ball::SetIsActive(bool isActive)
 
 void Ball::IncreaseSpeed()
 {
-	if (speed.x > 0)
+	if (speed.x > 0 && speed.x < 492)
 	{
 		speed.x += 0.01f;
 	}
-	else if (speed.x < 0)
+	else if (speed.x < 0 && speed.x > -492)
 	{
 		speed.x -= 0.01f;
 	}
 
-	if (speed.y > 0)
+	if (speed.y > 0 && speed.y < 492)
 	{
 		speed.y += 0.01f;
 	}
-	else if (speed.y < 0)
+	else if (speed.y < 0 && speed.y > -492)
 	{
 		speed.y -= 0.01f;
 	}
