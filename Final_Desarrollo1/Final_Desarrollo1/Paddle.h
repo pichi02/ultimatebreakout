@@ -8,6 +8,7 @@ private:
 	float speed;
 	float width;
 	float height;
+	int lifes;
 
 public:
 	Paddle(Vector2 pos, float speed, int width, int height);
@@ -20,6 +21,7 @@ public:
 	void Update();
 	void Draw();
 	void SetWidth(float width);
-	
+
+
 };
 

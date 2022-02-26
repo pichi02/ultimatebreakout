@@ -51,16 +51,26 @@ void Ball::Move(Paddle* paddle)
 
 }
 
-void Ball::CheckWallCollision()
+void Ball::CheckWallCollision(bool& collideX, bool& collideY)
 {
 
-	if (pos.x <= 0 || pos.x + width >= GetScreenWidth())
+	if ((pos.x <= 0 || pos.x + width >= GetScreenWidth()) && !collideX)
 	{
+		collideX = true;
 		speed.x *= -1;
 	}
-	if (pos.y <= 0)
+	else if (pos.x > 0 || pos.x + width < GetScreenWidth())
+	{
+		collideX = false;
+	}
+	if (pos.y <= 0 && !collideY)
 	{
 		speed.y *= -1;
+		collideY = true;
+	}
+	else if (pos.y > 0)
+	{
+		collideY = false;
 	}
 
 }
@@ -105,11 +115,11 @@ void Ball::Draw()
 	DrawRectangle(pos.x, pos.y, width, height, WHITE);
 }
 
-void Ball::Update(Paddle* paddle, bool& collide)
+void Ball::Update(Paddle* paddle, bool& paddleCollide, bool& collideX, bool& collideY)
 {
 	Move(paddle);
-	CheckWallCollision();
-	CheckPaddleCollision(*paddle, collide);
+	CheckWallCollision(collideX, collideY);
+	CheckPaddleCollision(*paddle, paddleCollide);
 }
 
 void Ball::ReverseXSpeed()

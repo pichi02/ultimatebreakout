@@ -45,7 +45,7 @@ void PowerUp::SetIsActive(bool isActive)
 
 void PowerUp::Move()
 {
-	pos.y += speed;
+	pos.y += speed*GetFrameTime();
 }
 
 bool PowerUp::GetIsActive()

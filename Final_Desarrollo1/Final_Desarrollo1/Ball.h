@@ -18,10 +18,10 @@ public:
 	float GetWidth();
 	float GetHeight();
 	void Move(Paddle *paddle);
-	void CheckWallCollision();
+	void CheckWallCollision(bool& collideX, bool& collideY);
 	void CheckPaddleCollision(Paddle paddle, bool& collide);
 	void Draw();
-	void Update(Paddle *paddle, bool& collide);
+	void Update(Paddle *paddle, bool& paddleCollide, bool& collideX, bool& collideY);
 	void ReverseXSpeed();
 	void ReverseYSpeed();
 	bool GetIsActive();

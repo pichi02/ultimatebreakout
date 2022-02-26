@@ -12,10 +12,13 @@ namespace gamemanager
 	{
 		extern bool gameOver = false;
 		bool win;
-		bool collide = false;
+		bool ballAndPaddleCollide = false;
+		bool ballAndWallXCollide;
+		bool ballAndWallYCollide;
 		bool isPowerUp1Picked;
 		bool isPowerUp2Picked;
 		bool isPowerUp3Picked;
+		bool resetLevel = true;
 		const int bricksPerColumn = 11;
 		const int bricksPerRow = 5;
 		float brickWidth = 61;
@@ -27,6 +30,7 @@ namespace gamemanager
 		int smashedBicksCount;
 		int powerUpRandom;
 		int lastPowerUpRandom;
+		int lifes;
 
 		Ball* ball;
 		Paddle* paddle;
@@ -37,32 +41,39 @@ namespace gamemanager
 
 		void InitValues()
 		{
+			if (resetLevel)
+			{
+				lifes = 3;
+				smashedBicksCount = 0;
+				for (int i = 0; i < bricksPerColumn; i++)
+				{
+					for (int j = 0; j < bricksPerRow; j++)
+					{
+						bricks[i][j] = new Brick(brickWidth, brickHeight, { (brickWidth * 1.2f) * i,(brickHeight * 1.2f) * j + 60 });
+					}
+				}
+			}
+
 			timer = 0;
 			isPowerUp1Picked = false;
 			isPowerUp2Picked = false;
 			isPowerUp3Picked = false;
+			ballAndWallXCollide = false;
+			ballAndWallYCollide = false;
 			powerUp1Timer = 0;
 			powerUp1Timer = 0;
 			powerUp3Timer = 0;
-			smashedBicksCount = 0;
 			powerUpRandom = 0;
 			lastPowerUpRandom = 0;
 			win = false;
 			gameOver = false;
 			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { 150.0f,-150.0f }, 15, 15);
 			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
-			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 0.05f, 10, 10, false);
-			powerUp2 = new ShootsPowerUp({ 0,0 }, 0.05f, 10, 10, false, paddle);
-			powerUp3 = new FloorPowerUp({ 0,0 }, 0.05f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.95f,(float)GetScreenWidth(),10.0f });
+			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 150.0f, 10, 10, false);
+			powerUp2 = new ShootsPowerUp({ 0,0 }, 150.0f, 10, 10, false, paddle);
+			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.95f,(float)GetScreenWidth(),10.0f });
 
-			for (int i = 0; i < bricksPerColumn; i++)
-			{
-				for (int j = 0; j < bricksPerRow; j++)
-				{
-					bricks[i][j] = new Brick(brickWidth, brickHeight, { (brickWidth * 1.2f) * i,(brickHeight * 1.2f) * j + 60 });
-				}
-			}
-
+			resetLevel = false;
 
 		}
 		void UpdateFrame()
@@ -76,7 +87,7 @@ namespace gamemanager
 				{
 					ball->IncreaseSpeed();
 				}
-				ball->Update(paddle, collide);
+				ball->Update(paddle, ballAndPaddleCollide, ballAndWallXCollide, ballAndWallYCollide);
 				paddle->Update();
 				if (powerUp1->GetIsActive() && !isPowerUp1Picked)
 				{
@@ -208,11 +219,21 @@ namespace gamemanager
 			}
 			if (smashedBicksCount >= bricksPerColumn * bricksPerRow)
 			{
+				resetLevel = true;
 				currentScreen = GAMEOVER;
+
+			}
+			if (ball->GetPos().y >= GetScreenHeight())
+			{
+				lifes--;
+				InitValues();
 			}
 
-
 			gameOver = GameOver();
+			if (gameOver)
+			{
+				resetLevel = true;
+			}
 		}
 		void Draw()
 		{
@@ -261,7 +282,7 @@ namespace gamemanager
 		}
 		bool GameOver()
 		{
-			return ball->GetPos().y >= GetScreenHeight();;
+			return lifes <= 0;
 		}
 		void CheckPause()
 		{
