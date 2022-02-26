@@ -22,7 +22,7 @@ public:
 	void CheckPaddleCollision(Paddle paddle, bool& collide);
 	void Draw();
 	void Update(Paddle *paddle, bool& paddleCollide, bool& collideX, bool& collideY);
-	void ReverseXSpeed();
+	void ReverseSpeedX();
 	void ReverseYSpeed();
 	bool GetIsActive();
 	void SetIsActive(bool isActive);

@@ -31,6 +31,7 @@ namespace gamemanager
 		int powerUpRandom;
 		int lastPowerUpRandom;
 		int lifes;
+		float ballSpeedX;
 
 		Ball* ball;
 		Paddle* paddle;
@@ -67,11 +68,20 @@ namespace gamemanager
 			lastPowerUpRandom = 0;
 			win = false;
 			gameOver = false;
-			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { 150.0f,-150.0f }, 15, 15);
+			int rand = GetRandomValue(1, 10);
+			if (rand<=5)
+			{
+				ballSpeedX = 150.0f;
+			}
+			else
+			{
+				ballSpeedX = -150.0f;
+			}
+			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { ballSpeedX,-150.0f }, 15, 15);
 			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
 			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 150.0f, 10, 10, false);
 			powerUp2 = new ShootsPowerUp({ 0,0 }, 150.0f, 10, 10, false, paddle);
-			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.95f,(float)GetScreenWidth(),10.0f });
+			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.93f,(float)GetScreenWidth(),10.0f });
 
 			resetLevel = false;
 

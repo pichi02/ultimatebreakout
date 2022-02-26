@@ -101,7 +101,11 @@ void Ball::CheckPaddleCollision(Paddle paddle, bool& collide)
 		{
 			speed.x = speed.y;
 		}
-		speed.y *= -1;
+		if (speed.y > 0)
+		{
+			speed.y *= -1;
+		}
+
 
 	}
 	else if (!CheckCollisionRecs(Rectangle{ pos.x,pos.y,width,height }, Rectangle{ paddle.GetPos().x,paddle.GetPos().y, paddle.GetWidth(),paddle.GetHeight() }))
@@ -122,7 +126,7 @@ void Ball::Update(Paddle* paddle, bool& paddleCollide, bool& collideX, bool& col
 	CheckPaddleCollision(*paddle, paddleCollide);
 }
 
-void Ball::ReverseXSpeed()
+void Ball::ReverseSpeedX()
 {
 	speed.x *= -1;
 }

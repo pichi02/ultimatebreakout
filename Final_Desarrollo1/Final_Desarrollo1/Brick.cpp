@@ -25,7 +25,7 @@ void Brick::CheckBallCollision(Ball* ball)
 			{
 				if (ball->GetSpeed().x > 0)
 				{
-					ball->ReverseXSpeed();
+					ball->ReverseSpeedX();
 				}
 
 			}
@@ -33,7 +33,7 @@ void Brick::CheckBallCollision(Ball* ball)
 			{
 				if (ball->GetSpeed().x < 0)
 				{
-					ball->ReverseXSpeed();
+					ball->ReverseSpeedX();
 				}
 			}
 
