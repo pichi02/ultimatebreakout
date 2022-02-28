@@ -55,6 +55,10 @@ namespace gamemanager
 		Rectangle frameRecBigPaddleImage;
 		Vector2 bigPaddleImagePosition;
 
+		Texture2D ballSpriteTexture;
+		Image ballSpriteImage;
+		Rectangle frameRecBallImage;
+		Vector2 ballImagePosition;
 
 		void InitValues()
 		{
@@ -94,7 +98,7 @@ namespace gamemanager
 				ballSpeedX = -150.0f;
 			}
 			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { ballSpeedX,-150.0f }, 15, 15);
-			paddle = new Paddle({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
+			paddle = new Paddle({ GetScreenWidth() / 2.5f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
 			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 150.0f, 10, 10, false);
 			powerUp2 = new ShootsPowerUp({ 0,0 }, 150.0f, 10, 10, false, paddle);
 			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.93f,(float)GetScreenWidth(),10.0f });
@@ -118,13 +122,21 @@ namespace gamemanager
 			bigPaddleSpriteTexture.height = paddle->GetHeight();
 			bigPaddleSpriteTexture.width = 300.0f;
 			frameRecBigPaddleImage = { 0.0f, 0.0f, (float)bigPaddleSpriteTexture.width, (float)bigPaddleSpriteTexture.height };
-			bigPaddleImagePosition=paddle->GetPos();
+			bigPaddleImagePosition = paddle->GetPos();
 			bigPaddleSpriteImage = LoadImage("res/bigpaddle.png");
 			bigPaddleSpriteTexture = LoadTextureFromImage(bigPaddleSpriteImage);
-			
+
+			ballSpriteTexture.height = ball->GetHeight();
+			ballSpriteTexture.width = ball->GetWidth();
+			frameRecBallImage = { 0.0f, 0.0f, (float)ballSpriteTexture.width, (float)ballSpriteTexture.height };
+			ballImagePosition = ball->GetPos();
+			ballSpriteImage = LoadImage("res/ball.png");
+			ballSpriteTexture = LoadTextureFromImage(ballSpriteImage);
+
 		}
 		void UpdateFrame()
 		{
+			ballImagePosition = ball->GetPos();
 			if (!gameOver)
 			{
 
@@ -356,7 +368,7 @@ namespace gamemanager
 
 			}
 			/*paddle->Draw();*/
-			ball->Draw();
+			/*ball->Draw();*/
 		}
 		void ResetValues()
 		{
