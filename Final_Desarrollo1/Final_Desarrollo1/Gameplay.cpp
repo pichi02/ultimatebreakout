@@ -32,6 +32,7 @@ namespace gamemanager
 		int lastPowerUpRandom;
 		int lifes;
 		float ballSpeedX;
+		const float controllerInstructionTime = 16;
 
 		Ball* ball;
 		Paddle* paddle;
@@ -323,6 +324,12 @@ namespace gamemanager
 		{
 			ClearBackground(BLACK);
 			DrawTextureEx(gameplayBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+			DrawTextureEx(ballSpriteTexture, { ball->GetPos().x,ball->GetPos().y }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+			if (timer <= controllerInstructionTime && (int)timer % 2 == 0)
+			{
+				DrawText("Press A to move LEFT", GetScreenWidth()*0.01f,GetScreenHeight()*0.95f, 15, GREEN);
+				DrawText("Press D to move RIGHT", GetScreenWidth() * 0.78f, GetScreenHeight() * 0.95f, 15, GREEN);
+			}
 			if (isPowerUp1Picked)
 			{
 				DrawTextureEx(bigPaddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);
