@@ -40,6 +40,17 @@ namespace gamemanager
 		ShootsPowerUp* powerUp2;
 		FloorPowerUp* powerUp3;
 
+		Texture2D gameplayBackgroundTexture;
+		Image gameplayImage;
+		Rectangle frameRecGameplayBackground;
+		Vector2 gameplayBackgroundPosition;
+
+		Texture2D paddleSpriteTexture;
+		Image paddleSpriteImage;
+		Rectangle frameRecPaddleImage;
+		Vector2 paddleImagePosition;
+
+
 		void InitValues()
 		{
 			if (resetLevel)
@@ -69,7 +80,7 @@ namespace gamemanager
 			win = false;
 			gameOver = false;
 			int rand = GetRandomValue(1, 10);
-			if (rand<=5)
+			if (rand <= 5)
 			{
 				ballSpeedX = 150.0f;
 			}
@@ -84,6 +95,22 @@ namespace gamemanager
 			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.93f,(float)GetScreenWidth(),10.0f });
 
 			resetLevel = false;
+
+			gameplayBackgroundTexture.height = GetScreenHeight();
+			gameplayBackgroundTexture.width = GetScreenWidth();
+			frameRecGameplayBackground = { 0.0f, 0.0f, (float)gameplayBackgroundTexture.width, (float)gameplayBackgroundTexture.height };
+			gameplayBackgroundPosition = { 0,0 };
+			gameplayImage = LoadImage("res/background.png");
+			gameplayBackgroundTexture = LoadTextureFromImage(gameplayImage);
+
+			paddleSpriteTexture.height = paddle->GetHeight();
+			paddleSpriteTexture.width = paddle->GetWidth();
+			frameRecPaddleImage = { 0.0f, 0.0f, (float)paddleSpriteTexture.width, (float)paddleSpriteTexture.height };
+			paddleImagePosition = paddle->GetPos();
+			paddleSpriteImage = LoadImage("res/paddle.png");
+			paddleSpriteTexture = LoadTextureFromImage(paddleSpriteImage);
+
+
 
 		}
 		void UpdateFrame()
@@ -168,7 +195,7 @@ namespace gamemanager
 
 				if (powerUp1Timer >= 10)
 				{
-					paddle->SetWidth(150);
+					paddle->SetWidth(140);
 					isPowerUp1Picked = false;
 					powerUp1->SetIsActive(false);
 					powerUp1Timer = 0;
@@ -179,7 +206,7 @@ namespace gamemanager
 					powerUp3->SetIsActive(false);
 					powerUp3Timer = 0;
 				}
-				if (!isPowerUp1Picked&&powerUp1->GetPos().y>GetScreenHeight())
+				if (!isPowerUp1Picked && powerUp1->GetPos().y > GetScreenHeight())
 				{
 					powerUp1->SetIsActive(false);
 				}
@@ -217,7 +244,7 @@ namespace gamemanager
 										powerUp1->SetPos(bricks[i][j]->GetPos());
 
 									}
-									
+
 
 								}
 								else if (powerUpRandom == 9)
@@ -227,7 +254,7 @@ namespace gamemanager
 										powerUp2->SetIsActive(true);
 										powerUp2->SetPos(bricks[i][j]->GetPos());
 									}
-									
+
 								}
 								else if (powerUpRandom == 8)
 								{
@@ -236,7 +263,7 @@ namespace gamemanager
 										powerUp3->SetIsActive(true);
 										powerUp3->SetPos(bricks[i][j]->GetPos());
 									}
-									
+
 								}
 								smashedBicksCount++;
 							}
@@ -273,7 +300,12 @@ namespace gamemanager
 		void Draw()
 		{
 			ClearBackground(BLACK);
-
+			DrawTextureEx(gameplayBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+			DrawTextureEx(paddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);
+			if (isPowerUp2Picked && powerUp2Timer < 10)
+			{
+				powerUp2->DrawShoots();
+			}
 			for (int i = 0; i < bricksPerColumn; i++)
 			{
 				for (int j = 0; j < bricksPerRow; j++)

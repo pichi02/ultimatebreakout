@@ -14,7 +14,7 @@ public:
 	void Collect(Paddle* paddle, Ball* ball);
 	void CheckShootAndBrickCollision(Brick* brick, int& smashedBricksCount);
 	void Draw();
-
+	void DrawShoots();
 	void TurnOffShoots();
 
 

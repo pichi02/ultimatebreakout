@@ -67,6 +67,18 @@ void ShootsPowerUp::Draw()
 	DrawRectangle(GetPos().x, GetPos().y, GetWidth(), GetHeight(), BLUE);
 }
 
+void ShootsPowerUp::DrawShoots()
+{
+	for (int i = 0; i < shootsAmount; i++)
+	{
+		if (shoots[i]->GetIsActive())
+		{	
+			shoots[i]->Draw();
+		}
+
+	}
+}
+
 void ShootsPowerUp::TurnOffShoots()
 {
 	for (int i = 0; i < shootsAmount; i++)
