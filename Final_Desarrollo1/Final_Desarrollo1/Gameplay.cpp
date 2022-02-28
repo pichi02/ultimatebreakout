@@ -50,6 +50,11 @@ namespace gamemanager
 		Rectangle frameRecPaddleImage;
 		Vector2 paddleImagePosition;
 
+		Texture2D bigPaddleSpriteTexture;
+		Image bigPaddleSpriteImage;
+		Rectangle frameRecBigPaddleImage;
+		Vector2 bigPaddleImagePosition;
+
 
 		void InitValues()
 		{
@@ -110,8 +115,13 @@ namespace gamemanager
 			paddleSpriteImage = LoadImage("res/paddle.png");
 			paddleSpriteTexture = LoadTextureFromImage(paddleSpriteImage);
 
-
-
+			bigPaddleSpriteTexture.height = paddle->GetHeight();
+			bigPaddleSpriteTexture.width = 300.0f;
+			frameRecBigPaddleImage = { 0.0f, 0.0f, (float)bigPaddleSpriteTexture.width, (float)bigPaddleSpriteTexture.height };
+			bigPaddleImagePosition=paddle->GetPos();
+			bigPaddleSpriteImage = LoadImage("res/bigpaddle.png");
+			bigPaddleSpriteTexture = LoadTextureFromImage(bigPaddleSpriteImage);
+			
 		}
 		void UpdateFrame()
 		{
@@ -301,7 +311,15 @@ namespace gamemanager
 		{
 			ClearBackground(BLACK);
 			DrawTextureEx(gameplayBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
-			DrawTextureEx(paddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);
+			if (isPowerUp1Picked)
+			{
+				DrawTextureEx(bigPaddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);
+			}
+			else
+			{
+				DrawTextureEx(paddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);
+			}
+
 			if (isPowerUp2Picked && powerUp2Timer < 10)
 			{
 				powerUp2->DrawShoots();
@@ -337,7 +355,7 @@ namespace gamemanager
 				}
 
 			}
-			paddle->Draw();
+			/*paddle->Draw();*/
 			ball->Draw();
 		}
 		void ResetValues()
