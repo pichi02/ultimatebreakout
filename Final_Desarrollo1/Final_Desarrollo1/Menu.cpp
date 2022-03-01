@@ -46,9 +46,11 @@ namespace gamemanager
 		static int halfScreenHeight = 0;
 
 
-		static Image menuImage;
-		static Texture2D menuImageTexture;
-		static float scaleBackground;
+
+		Texture2D menuBackgroundTexture;
+		Image menuImage;
+		Rectangle frameRecMenuBackground;
+		Vector2 menuBackgroundPosition;
 
 		extern bool isMultiplayer = false;
 
@@ -56,9 +58,16 @@ namespace gamemanager
 		{
 
 			/*menuImage = LoadImage("res/menuTexture.png");*/
-			menuImageTexture = LoadTextureFromImage(menuImage);
+			
 			halfScreenWidth = GetScreenWidth() / 2;
 			halfScreenHeight = GetScreenHeight() / 2;
+
+			menuBackgroundTexture.height = GetScreenHeight();
+			menuBackgroundTexture.width = GetScreenWidth();
+			frameRecMenuBackground = { 0.0f, 0.0f, (float)menuBackgroundTexture.width, (float)menuBackgroundTexture.height };
+			menuBackgroundPosition = { 0,0 };
+			menuImage = LoadImage("res/background.png");
+			menuBackgroundTexture = LoadTextureFromImage(menuImage);
 
 			sizeText2 = (GetScreenWidth() * 20) / scaleAux1;
 			sizeText3 = (GetScreenWidth() * 15) / scaleAux1;
@@ -74,10 +83,10 @@ namespace gamemanager
 			titlePosX = halfScreenWidth - MeasureText(gameTitle, titleTextSize) / 2;
 			titlePosY = GetScreenHeight() / 100 * 20;
 
-			colorRect1 = RED;
-			colorRect2 = RED;
-			colorRect3 = RED;
-			colorRect4 = RED;
+			colorRect1 = BLUE;
+			colorRect2 = BLUE;
+			colorRect3 = BLUE;
+			colorRect4 = BLUE;
 
 
 			rect2.height = (GetScreenWidth() * 80) / scaleAux2;
@@ -95,7 +104,7 @@ namespace gamemanager
 			rect4.x = halfScreenWidth - rect2.width / 2;
 			rect4.y = halfScreenHeight + GetScreenHeight() * 0.01;
 
-			scaleBackground = (GetScreenWidth() * 1.0f) / scaleAux3;
+		
 		}
 
 		void UpdateMenu()
@@ -142,7 +151,7 @@ namespace gamemanager
 		void DrawMenu()
 		{
 			ClearBackground(WHITE);
-			DrawTextureEx(menuImageTexture, { 0,0 }, 0, GetScreenWidth() / GetScreenHeight(), WHITE);
+			DrawTextureEx(menuBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			DrawRectangleRec(rect2, colorRect2);
 			DrawRectangleRec(rect3, colorRect3);
 			DrawRectangleRec(rect4, colorRect4);
@@ -155,8 +164,7 @@ namespace gamemanager
 
 		void UnloadMenu()
 		{
-			UnloadTexture(menuImageTexture);
-			UnloadImage(menuImage);
+			
 
 		}
 
