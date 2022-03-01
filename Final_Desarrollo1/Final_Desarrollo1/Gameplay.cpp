@@ -91,10 +91,18 @@ namespace gamemanager
 		Rectangle frameRecpowerUp3;
 		Vector2 powerUp3ImagePosition;
 
+		Music gameplayMusic;
+
+	
+
 		void InitValues()
 		{
+			
+			
 			if (resetLevel)
 			{
+				InitAudioDevice();
+				gameplayMusic = LoadMusicStream("res/gameplayMusic.ogg");
 				lifes = 3;
 				smashedBicksCount = 0;
 				for (int i = 0; i < bricksPerColumn; i++)
@@ -113,7 +121,7 @@ namespace gamemanager
 			ballAndWallXCollide = false;
 			ballAndWallYCollide = false;
 			powerUp1Timer = 0;
-			powerUp1Timer = 0;
+			powerUp2Timer = 0;
 			powerUp3Timer = 0;
 			powerUpRandom = 0;
 			lastPowerUpRandom = 0;
@@ -214,7 +222,8 @@ namespace gamemanager
 			if (!gameOver)
 			{
 
-
+				PlayMusicStream(gameplayMusic);
+				UpdateMusicStream(gameplayMusic);
 				timer += GetFrameTime();
 				if ((int)timer % 10 == 0)
 				{
@@ -262,6 +271,7 @@ namespace gamemanager
 
 				if (isPowerUp2Picked && powerUp2Timer < 10)
 				{
+					
 					powerUp2->Collect(paddle, ball);
 					powerUp2Timer += GetFrameTime();
 					for (int i = 0; i < bricksPerColumn; i++)
