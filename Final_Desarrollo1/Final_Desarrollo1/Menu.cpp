@@ -52,6 +52,8 @@ namespace gamemanager
 		Rectangle frameRecMenuBackground;
 		Vector2 menuBackgroundPosition;
 
+		Music menuMusic;
+
 		extern bool isMultiplayer = false;
 
 		void InitMenu()
@@ -68,7 +70,7 @@ namespace gamemanager
 			menuBackgroundPosition = { 0,0 };
 			menuImage = LoadImage("res/background.png");
 			menuBackgroundTexture = LoadTextureFromImage(menuImage);
-
+			menuMusic = LoadMusicStream("res/menuMusic.ogg");
 			sizeText2 = (GetScreenWidth() * 20) / scaleAux1;
 			sizeText3 = (GetScreenWidth() * 15) / scaleAux1;
 			titleTextSize = (GetScreenWidth() * 50) / scaleAux1;
@@ -109,6 +111,8 @@ namespace gamemanager
 
 		void UpdateMenu()
 		{
+			PlayMusicStream(menuMusic);
+			UpdateMusicStream(menuMusic);
 			mousePoint = GetMousePosition();
 
 			if (CheckCollisionPointRec(mousePoint, rect2))
@@ -118,6 +122,7 @@ namespace gamemanager
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
 					UnloadMenu();
+					
 					currentScreen = CREDITS;
 				}
 			}
