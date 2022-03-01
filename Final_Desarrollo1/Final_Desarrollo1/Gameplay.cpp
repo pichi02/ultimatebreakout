@@ -61,6 +61,11 @@ namespace gamemanager
 		Rectangle frameRecBallImage;
 		Vector2 ballImagePosition;
 
+		Texture2D heartTexture;
+		Image heartImage;
+		Rectangle frameRecHeart;
+		Vector2 heartImagePosition;
+
 		Texture2D brickTexture;
 		Image brickImage;
 		Rectangle frameRecBrick;
@@ -140,6 +145,12 @@ namespace gamemanager
 			ballSpriteImage = LoadImage("res/ball.png");
 			ballSpriteTexture = LoadTextureFromImage(ballSpriteImage);
 
+			heartTexture.height = 16;
+			heartTexture.width = 16;
+			frameRecHeart = { 0.0f, 0.0f, (float)heartTexture.width, (float)heartTexture.height };
+			heartImagePosition = { GetScreenWidth() * 0.9f,GetScreenHeight() * 0.01f };
+			heartImage = LoadImage("res/heart.png");
+			heartTexture = LoadTextureFromImage(heartImage);
 
 			brickTexture.height = brickHeight;
 			brickTexture.width = brickWidth;
@@ -343,7 +354,12 @@ namespace gamemanager
 		void Draw()
 		{
 			ClearBackground(BLACK);
+			/*DrawText("x"lifes, GetScreenWidth() * 0.01f, GetScreenHeight() * 0.95f, 15, GREEN)*/;
+
 			DrawTextureEx(gameplayBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+			DrawText(TextFormat("x % 01i", lifes), GetScreenWidth() * 0.95f, GetScreenHeight() * 0.02f, 15, WHITE);
+			DrawTextureEx(heartTexture, { heartImagePosition }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+
 			DrawTextureEx(ballSpriteTexture, { ball->GetPos().x,ball->GetPos().y }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			if (timer <= controllerInstructionTime && (int)timer % 2 == 0)
 			{
