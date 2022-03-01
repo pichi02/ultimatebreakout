@@ -44,9 +44,14 @@ namespace gamemanager
 		static Color colorRect4;
 		static Color backGround;
 
+		Texture2D pauseBackgroundTexture;
+		Image pauseImage;
+		Rectangle pauseRecMenuBackground;
+		Vector2 pauseBackgroundPosition;
+
 		static const int scaleAux1 = 800;
 		static const int scaleAux2 = 1600;
-
+	
 		void InitPause()
 		{
 			sizeText1 = (GetScreenWidth() * 80) / scaleAux1;
@@ -63,10 +68,10 @@ namespace gamemanager
 			text5PositionX = GetScreenWidth() / 2 - MeasureText(text5, sizeText2) / 2;
 			text5PositionY = GetScreenHeight() / 2 + GetScreenHeight() * 0.0333333;
 
-			colorRect1 = RED;
-			colorRect2 = RED;
-			colorRect3 = RED;
-			colorRect4 = RED;
+			colorRect1 = BLUE;
+			colorRect2 = BLUE;
+			colorRect3 = BLUE;
+			colorRect4 = BLUE;
 			backGround = BLANK;
 
 
@@ -89,6 +94,13 @@ namespace gamemanager
 			rect4.width = (GetScreenWidth() * 255) / scaleAux2;
 			rect4.x = GetScreenWidth() / 2 - rect1.width / 2;
 			rect4.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.01;
+
+			pauseBackgroundTexture.height = GetScreenHeight();
+			pauseBackgroundTexture.width = GetScreenWidth();
+			pauseRecMenuBackground = { 0.0f, 0.0f, (float)pauseBackgroundTexture.width, (float)pauseBackgroundTexture.height };
+			pauseBackgroundPosition = { 0,0 };
+			pauseImage = LoadImage("res/background.png");
+			pauseBackgroundTexture = LoadTextureFromImage(pauseImage);
 		}
 
 		void UpdatePause()
@@ -109,8 +121,9 @@ namespace gamemanager
 
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
+					resetLevel = true;
 					currentScreen = GAMEPLAY;
-					/*ResetValues();*/
+					ResetValues();
 				}
 			}
 			else colorRect3.a = 255;
@@ -121,9 +134,11 @@ namespace gamemanager
 
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 				{
+					
 					currentScreen = MENU;
 					/*UnloadGameplay();*/
 					InitMenu();
+					resetLevel = true;
 					/*ResetValues();*/
 
 				}
@@ -144,6 +159,7 @@ namespace gamemanager
 		void DrawPause()
 		{
 			ClearBackground(backGround);
+			DrawTextureEx(pauseBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			DrawRectangleRec(rect1, colorRect1);
 			DrawRectangleRec(rect2, colorRect2);
 			DrawRectangleRec(rect3, colorRect3);
