@@ -61,6 +61,15 @@ namespace gamemanager
 		Rectangle frameRecBallImage;
 		Vector2 ballImagePosition;
 
+		Texture2D brickTexture;
+		Image brickImage;
+		Rectangle frameRecBrick;
+		Vector2 brickImagePosition;
+
+		Texture2D brick2Texture;
+		Image brick2Image;
+		Rectangle frameRecBrick2;
+		Vector2 brick2ImagePosition;
 		void InitValues()
 		{
 			if (resetLevel)
@@ -100,9 +109,6 @@ namespace gamemanager
 			}
 			ball = new Ball({ GetScreenWidth() / 2.0f,GetScreenHeight() * 0.87f }, { ballSpeedX,-150.0f }, 15, 15);
 			paddle = new Paddle({ GetScreenWidth() / 2.5f,GetScreenHeight() * 0.9f }, 300.0f, 140, 10);
-			powerUp1 = new EnlargePaddlePowerUp({ 0,0 }, 150.0f, 10, 10, false);
-			powerUp2 = new ShootsPowerUp({ 0,0 }, 150.0f, 10, 10, false, paddle);
-			powerUp3 = new FloorPowerUp({ 0,0 }, 150.0f, 10, 10, false, Rectangle{ 0,GetScreenHeight() * 0.93f,(float)GetScreenWidth(),10.0f });
 
 			resetLevel = false;
 
@@ -134,6 +140,20 @@ namespace gamemanager
 			ballSpriteImage = LoadImage("res/ball.png");
 			ballSpriteTexture = LoadTextureFromImage(ballSpriteImage);
 
+
+			brickTexture.height = brickHeight;
+			brickTexture.width = brickWidth;
+			frameRecBrick = { 0.0f, 0.0f, (float)brickTexture.width, (float)brickTexture.height };
+			brickImagePosition = { 0,0 };
+			brickImage = LoadImage("res/brick.png");
+			brickTexture = LoadTextureFromImage(brickImage);
+
+			brick2Texture.height = brickHeight;
+			brick2Texture.width = brickWidth;
+			frameRecBrick2 = { 0.0f, 0.0f, (float)brick2Texture.width, (float)brick2Texture.height };
+			brick2ImagePosition = { 0,0 };
+			brick2Image = LoadImage("res/brick2.png");
+			brick2Texture = LoadTextureFromImage(brick2Image);
 		}
 		void UpdateFrame()
 		{
@@ -349,7 +369,15 @@ namespace gamemanager
 				{
 					if (bricks[i][j]->GetIsActive())
 					{
-						bricks[i][j]->Draw();
+						/*bricks[i][j]->Draw();*/
+						if (j % 2 == 0)
+						{
+							DrawTextureEx(brickTexture, { bricks[i][j]->GetPos().x - 2.0f,bricks[i][j]->GetPos().y }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+						}
+						else
+						{
+							DrawTextureEx(brick2Texture, { bricks[i][j]->GetPos().x - 2.0f,bricks[i][j]->GetPos().y }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
+						}
 					}
 
 				}
