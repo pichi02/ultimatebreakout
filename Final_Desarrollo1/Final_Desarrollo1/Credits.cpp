@@ -46,6 +46,11 @@ namespace gamemanager
 		static Rectangle rect1;
 		static Color colorRect1;
 
+		Texture2D creditsBackgroundTexture;
+		Image creditsImage;
+		Rectangle frameRecCreditsBackground;
+		Vector2 creditsBackgroundPosition;
+
 		void InitCredits()
 		{
 			sizeText = (GetScreenWidth() * 16) / scaleAux1;
@@ -66,12 +71,19 @@ namespace gamemanager
 			text8PositionX = halfScreen - MeasureText(text8, sizeText) / 2;
 			text8PositionY = GetScreenHeight() * 0.45;
 
-			colorRect1 = RED;
+			colorRect1 = BLUE;
 
 			rect1.height = (GetScreenWidth() * 80) / scaleAux2;
 			rect1.width = (GetScreenWidth() * 170) / scaleAux2;
 			rect1.x = halfScreen - rect1.width / 2;
 			rect1.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.275;
+
+			creditsBackgroundTexture.height = GetScreenHeight();
+			creditsBackgroundTexture.width = GetScreenWidth();
+			frameRecCreditsBackground = { 0.0f, 0.0f, (float)creditsBackgroundTexture.width, (float)creditsBackgroundTexture.height };
+			creditsBackgroundPosition = { 0,0 };
+			creditsImage = LoadImage("res/background.png");
+			creditsBackgroundTexture = LoadTextureFromImage(creditsImage);
 		}
 
 		void UpdateCredits()
@@ -93,6 +105,7 @@ namespace gamemanager
 		void DrawCredits()
 		{
 			ClearBackground(BLACK);
+			DrawTextureEx(creditsBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			DrawRectangleRec(rect1, colorRect1);
 			DrawText(text1, textPositionX, textPositionY, sizeText, WHITE);
 			DrawText(text4, text4PositionX, text4PositionY, sizeText2, BLACK);
