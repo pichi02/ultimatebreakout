@@ -41,6 +41,11 @@ namespace gamemanager
 		static const int scaleAux1 = 800;
 		static const int scaleAux2 = 1600;
 
+		Texture2D gameOverBackgroundTexture;
+		Image gameOverImage;
+		Rectangle frameRecGameOverBackground;
+		Vector2 gameOverBackgroundPosition;
+
 		void InitGameover()
 		{
 			halfScreenWidth = GetScreenWidth() / 2;
@@ -55,8 +60,8 @@ namespace gamemanager
 			text4PositionX = halfScreenWidth - MeasureText(text4, sizeText2) / 2;
 			text4PositionY = halfScreenHeight + GetScreenHeight() * 0.23333333;
 
-			colorRect1 = RED;
-			colorRect2 = RED;
+			colorRect1 = BLUE;
+			colorRect2 = BLUE;
 
 			rect1.height = (GetScreenWidth() * 80) / scaleAux2;
 			rect1.width = (GetScreenWidth() * 385) / scaleAux2;
@@ -67,6 +72,13 @@ namespace gamemanager
 			rect2.width = (GetScreenWidth() * 385) / scaleAux2;
 			rect2.x = halfScreenWidth - rect1.width / 2;
 			rect2.y = halfScreenHeight + GetScreenHeight() * 0.21;
+
+			gameOverBackgroundTexture.height = GetScreenHeight();
+			gameOverBackgroundTexture.width = GetScreenWidth();
+			frameRecGameOverBackground = { 0.0f, 0.0f, (float)gameOverBackgroundTexture.width, (float)gameOverBackgroundTexture.height };
+			gameOverBackgroundPosition = { 0,0 };
+			gameOverImage = LoadImage("res/background.png");
+			gameOverBackgroundTexture = LoadTextureFromImage(gameOverImage);
 		}
 		
 		void UpdateGameOver()
@@ -104,6 +116,7 @@ namespace gamemanager
 		void DrawGameOver()
 		{
 			ClearBackground(BLACK);
+			DrawTextureEx(gameOverBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			DrawRectangleRec(rect1, colorRect1);
 			DrawRectangleRec(rect2, colorRect2);
 			if (gameOver)
