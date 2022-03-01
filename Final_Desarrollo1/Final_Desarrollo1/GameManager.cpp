@@ -32,7 +32,7 @@ namespace gamemanager
 	{
 		SetExitKey(0);
 		InitWindow(screenWidth, screenHeight, "Ultimate Breakout");
-		/*InitValues();*/
+		InitValues();
 		InitMenu();
 		InitCredits();
 		InitGameover();

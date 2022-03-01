@@ -11,6 +11,7 @@ namespace gamemanager
 	namespace gameplay
 	{
 		extern bool gameOver = false;
+		extern bool resetLevel = true;
 		bool win;
 		bool ballAndPaddleCollide = false;
 		bool ballAndWallXCollide;
@@ -18,7 +19,6 @@ namespace gamemanager
 		bool isPowerUp1Picked;
 		bool isPowerUp2Picked;
 		bool isPowerUp3Picked;
-		bool resetLevel = true;
 		const int bricksPerColumn = 11;
 		const int bricksPerRow = 5;
 		float brickWidth = 61;
@@ -404,6 +404,7 @@ namespace gamemanager
 				DrawText("Press A to move LEFT", GetScreenWidth() * 0.01f, GetScreenHeight() * 0.95f, 15, GREEN);
 				DrawText("Press D to move RIGHT", GetScreenWidth() * 0.78f, GetScreenHeight() * 0.95f, 15, GREEN);
 			}
+			DrawText("Press P to PAUSE", GetScreenWidth() * 0.01f, GetScreenHeight() * 0.02f, 15, WHITE);
 			if (isPowerUp1Picked)
 			{
 				DrawTextureEx(bigPaddleSpriteTexture, { paddle->GetPos().x,paddle->GetPos().y - 4.0f }, 0, (GetScreenWidth()) / GetScreenWidth(), WHITE);

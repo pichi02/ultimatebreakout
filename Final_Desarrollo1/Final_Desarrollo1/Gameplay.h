@@ -8,6 +8,7 @@ namespace gamemanager
 	namespace gameplay
 	{
 		extern bool gameOver;
+		extern bool resetLevel;
 		void InitValues();
 		void UpdateFrame();
 		void Draw();
