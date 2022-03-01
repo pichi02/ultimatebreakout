@@ -92,6 +92,7 @@ namespace gamemanager
 		Vector2 powerUp3ImagePosition;
 
 		Music gameplayMusic;
+		Sound explosion;
 
 	
 
@@ -103,6 +104,8 @@ namespace gamemanager
 			{
 				InitAudioDevice();
 				gameplayMusic = LoadMusicStream("res/gameplayMusic.ogg");
+				explosion = LoadSound("res/explosion.ogg");
+				
 				lifes = 3;
 				smashedBicksCount = 0;
 				for (int i = 0; i < bricksPerColumn; i++)
@@ -331,7 +334,7 @@ namespace gamemanager
 							bricks[i][j]->Update(ball);
 							if (CheckCollisionRecs(Rectangle{ ball->GetPos().x,ball->GetPos().y,ball->GetWidth(),ball->GetHeight() }, Rectangle{ bricks[i][j]->GetPos().x,bricks[i][j]->GetPos().y,bricks[i][j]->GetWidth(),bricks[i][j]->GetHeight() }))
 							{
-
+								PlaySound(explosion);
 								do
 								{
 									powerUpRandom = GetRandomValue(1, 10);
