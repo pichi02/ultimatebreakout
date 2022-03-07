@@ -24,7 +24,9 @@ namespace gamemanager
 		static int text3PositionX = 0;
 		static int text3PositionY = 0;
 		static int text4PositionX = 0;
-		static int text4PositionY = 0;
+		static int text4PositionY = 0;		
+		static int text5PositionX = 0;
+		static int text5PositionY = 0;
 		static int winnerNumber = 0;
 		static int sizeText1 = 0;
 		static int sizeText2 = 0;
@@ -59,7 +61,8 @@ namespace gamemanager
 			text3PositionY = halfScreenHeight + GetScreenHeight() * 0.13333333;
 			text4PositionX = halfScreenWidth - MeasureText(text4, sizeText2) / 2;
 			text4PositionY = halfScreenHeight + GetScreenHeight() * 0.23333333;
-
+			text5PositionX = halfScreenWidth - MeasureText(text5, sizeText1) / 2;
+			text5PositionY = halfScreenHeight - GetScreenHeight() * 0.13333333;;
 			colorRect1 = BLUE;
 			colorRect2 = BLUE;
 
@@ -125,7 +128,7 @@ namespace gamemanager
 			}
 			else
 			{
-				DrawText(text5, text1PositionX, text1PositionY, sizeText1, WHITE);
+				DrawText(text5, text5PositionX, text5PositionY, sizeText1, WHITE);
 			}
 			DrawText(text3, text3PositionX, text3PositionY, sizeText2, BLACK);
 			DrawText(text4, text4PositionX, text4PositionY, sizeText2, BLACK);
