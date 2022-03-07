@@ -94,18 +94,18 @@ namespace gamemanager
 		Music gameplayMusic;
 		Sound explosion;
 
-	
+
 
 		void InitValues()
 		{
-			
-			
+
+
 			if (resetLevel)
 			{
 				InitAudioDevice();
 				gameplayMusic = LoadMusicStream("res/gameplayMusic.ogg");
 				explosion = LoadSound("res/explosion.ogg");
-				
+
 				lifes = 3;
 				smashedBicksCount = 0;
 				for (int i = 0; i < bricksPerColumn; i++)
@@ -228,7 +228,7 @@ namespace gamemanager
 				PlayMusicStream(gameplayMusic);
 				UpdateMusicStream(gameplayMusic);
 				timer += GetFrameTime();
-				if ((int)timer % 10 == 0)
+				if ((int)timer % 10 == 0 && ball->GetIsActive())
 				{
 					ball->IncreaseSpeed();
 				}
@@ -274,7 +274,7 @@ namespace gamemanager
 
 				if (isPowerUp2Picked && powerUp2Timer < 10)
 				{
-					
+
 					powerUp2->Collect(paddle, ball);
 					powerUp2Timer += GetFrameTime();
 					for (int i = 0; i < bricksPerColumn; i++)
