@@ -113,6 +113,16 @@ namespace gamemanager
 			DrawText(text6, text6PositionX, text6PositionY, sizeText, WHITE);
 			DrawText(text7, text7PositionX, text7PositionY, sizeText, WHITE);
 			DrawText(text8, text8PositionX, text8PositionY, sizeText, WHITE);
+			DrawText("background by Westbeam (https://opengameart.org/content/space-background-1) ", GetScreenWidth() * 0.16f, GetScreenHeight() * 0.3, 15, WHITE);
+			DrawText("paddle sprite by Buch (https://opengameart.org/content/breakout-set) ", GetScreenWidth() * 0.20f, GetScreenHeight() * 0.35, 15, WHITE);
+			DrawText("bricks sprites by Buch (https://opengameart.org/content/breakout-set) ", GetScreenWidth() * 0.20f, GetScreenHeight() * 0.40, 15, WHITE);
+			DrawText("ball sprite by Buch (https://opengameart.org/content/breakout-set) ", GetScreenWidth() * 0.20f, GetScreenHeight() * 0.45, 15, WHITE);
+			DrawText("heart sprite by Dansevenstar (https://opengameart.org/content/heart-pixel-art) ", GetScreenWidth() * 0.16f, GetScreenHeight() * 0.50, 15, WHITE);
+			DrawText("gameplay music by Ville Nousiainen / Xythe / mutkanto (https://opengameart.org/content/fast-fight-battle-music) ", GetScreenWidth() * 0.05f, GetScreenHeight() * 0.55, 13, WHITE);
+			DrawText("menu music by yd (https://opengameart.org/content/space-music-out-there) ", GetScreenWidth() * 0.17f, GetScreenHeight() * 0.60, 15, WHITE);
+			DrawText("bricks sfx by hosch (https://opengameart.org/content/8-bit-sound-effects-2) ", GetScreenWidth() * 0.17f, GetScreenHeight() * 0.65, 15, WHITE);
+			DrawText("Created by Lucas Pich", GetScreenWidth() * 0.29f, GetScreenHeight() * 0.12, 30, WHITE);
+
 		}
 	}
 }
