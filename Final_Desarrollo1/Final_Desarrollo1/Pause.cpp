@@ -17,8 +17,7 @@ namespace gamemanager
 		bool mute = false;
 		static char text1[] = "PAUSA";
 		static char text2[] = "MENU";
-		static char text3[] = "SONIDO";
-		static char text4[] = "REINICIAR";
+		static char text3[] = "REINICIAR";
 		static char text5[] = "SEGUIR";
 		static int sizeText1 = 0;
 		static int sizeText2 = 0;
@@ -29,13 +28,10 @@ namespace gamemanager
 		static int text2PositionY = 0;
 		static int text3PositionX = 0;
 		static int text3PositionY = 0;
-		static int text4PositionX = 0;
-		static int text4PositionY = 0;
 		static int text5PositionX = 0;
 		static int text5PositionY = 0;
 		static Vector2 mousePoint;
 		static Rectangle rect1;
-		static Rectangle rect2;
 		static Rectangle rect3;
 		static Rectangle rect4;
 		static Color colorRect1;
@@ -63,8 +59,6 @@ namespace gamemanager
 			text2PositionY = GetScreenHeight() / 2 + GetScreenHeight() * 0.1333333;
 			text3PositionX = GetScreenWidth() / 2 - MeasureText(text3, sizeText2) / 2;
 			text3PositionY = GetScreenHeight() / 2 + GetScreenHeight() * 0.2333333;
-			text4PositionX = GetScreenWidth() / 2 - MeasureText(text4, sizeText2) / 2;
-			text4PositionY = GetScreenHeight() / 2 + GetScreenHeight() * 0.3333333;
 			text5PositionX = GetScreenWidth() / 2 - MeasureText(text5, sizeText2) / 2;
 			text5PositionY = GetScreenHeight() / 2 + GetScreenHeight() * 0.0333333;
 
@@ -80,15 +74,11 @@ namespace gamemanager
 			rect1.x = GetScreenWidth() / 2 - rect1.width / 2;
 			rect1.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.11;
 
-			rect2.height = (GetScreenWidth() * 80) / scaleAux2;
-			rect2.width = (GetScreenWidth() * 255) / scaleAux2;
-			rect2.x = GetScreenWidth() / 2 - rect1.width / 2;
-			rect2.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.21;
-
+		
 			rect3.height = (GetScreenWidth() * 80) / scaleAux2;
 			rect3.width = (GetScreenWidth() * 255) / scaleAux2;
 			rect3.x = GetScreenWidth() / 2 - rect1.width / 2;
-			rect3.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.31;
+			rect3.y = GetScreenHeight() / 2 + GetScreenHeight() * 0.21;
 
 			rect4.height = (GetScreenWidth() * 80) / scaleAux2;
 			rect4.width = (GetScreenWidth() * 255) / scaleAux2;
@@ -144,16 +134,7 @@ namespace gamemanager
 				}
 			}
 			else colorRect1.a = 255;
-			if (CheckCollisionPointRec(mousePoint, rect2))
-			{
-				colorRect2.a = 120;
-
-				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-				{
-					mute = !mute;
-				}
-			}
-			else colorRect2.a = 255;
+			
 		}
 
 		void DrawPause()
@@ -161,13 +142,12 @@ namespace gamemanager
 			ClearBackground(backGround);
 			DrawTextureEx(pauseBackgroundTexture, { 0,0 }, 0, (GetScreenWidth() * 1.0f) / GetScreenWidth(), WHITE);
 			DrawRectangleRec(rect1, colorRect1);
-			DrawRectangleRec(rect2, colorRect2);
 			DrawRectangleRec(rect3, colorRect3);
 			DrawRectangleRec(rect4, colorRect4);
 			DrawText(text1, textPositionX, textPositionY, sizeText1, RAYWHITE);
 			DrawText(text2, text2PositionX, text2PositionY, sizeText2, BLACK);
 			DrawText(text3, text3PositionX, text3PositionY, sizeText2, BLACK);
-			DrawText(text4, text4PositionX, text4PositionY, sizeText2, BLACK);
+		
 			DrawText(text5, text5PositionX, text5PositionY, sizeText2, BLACK);
 		}
 	}
